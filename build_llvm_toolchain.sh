@@ -1,8 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+# User-configurable variables
 REPO=http://llvm.org/svn/llvm-project
 IWYU_REPO=https://github.com/include-what-you-use/include-what-you-use.git
 VER_NUM=6.0.0
+
+# Check prerequisites
+for cmd in "svn" "git" "cmake" "ninja"; do
+  hash ${cmd} 2> /dev/null || { echo >&2 "${cmd} is not installed."; exit 1; }
+done
+exit
 
 if [[ -z "$1" ]]; then
   echo "No INSTALL_PREFIX argument provided"
